@@ -2,6 +2,7 @@
 
 # This script is putting together videoclips for the LED screens in Himmelstalundshallen.
 # Written by mikael.olsson@emmio.se
+# Feel free to use it any way you'd like, no responsibilty taken for data loss etc.
 # Params: You can use the filenames for the videoclips as parameters to the script.
 # The script will try to identify any clips in the folder based on filename and use them.
 # Since screens 2 and 4 are equally sized, if the script can only find three clips, it will
@@ -14,8 +15,12 @@
 # 4          7  1120x160
 
 # Config:
-clip_length=10                     # Value in seconds.
-target_folder="/Users/micke/Sync/" # Where to copy the finished clip. Leave empty if you don't wish to copy it.
+
+# Length of clip in seconds.
+clip_length=10
+
+# Where to copy the finished clip. Leave empty if you don't wish to copy it.
+target_folder=""
 
 # Get the current folder name to use as file name.
 # I e, company/*.mp4 will result in company/company.mp4.
