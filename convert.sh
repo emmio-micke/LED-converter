@@ -2,7 +2,6 @@
 
 # This script is putting together videoclips for the LED screens in Himmelstalundshallen.
 # Written by mikael.olsson@emmio.se
-# Feel free to use it any way you'd like, no responsibilty taken for data loss etc.
 # Params: You can use the filenames for the videoclips as parameters to the script.
 # The script will try to identify any clips in the folder based on filename and use them.
 # Since screens 2 and 4 are equally sized, if the script can only find three clips, it will
