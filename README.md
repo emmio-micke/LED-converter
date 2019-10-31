@@ -10,11 +10,16 @@ The script will try to identify any clips in the folder based on filename and us
 Install by cloning repo and setting an alias:
 ```
 git clone git@github.com:emmio-micke/LED-converter.git
+cd LED-converter
+```
+
+Edit the config section:
+```
+nano convert.sh
 ```
 
 Make it runnable:
 ```
-cd LED-converter
 chmod +x convert.sh
 ```
 
@@ -23,7 +28,7 @@ In your profile script:
 alias ledcon="<path>/convert.sh"
 ```
 
-Change folder and run script:
+Change folder to where you have your section video clips and run script:
 ```
 cd "<path>"
 ledcon
