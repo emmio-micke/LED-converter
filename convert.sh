@@ -56,17 +56,17 @@ if [ "$#" -eq 0 ]; then
         fi
 
         # Check if file names have section names in them.
-        if [[ $filename == *"e"*"tion"*"1"* ]]; then
+        if [[ $filename == *"e"*"tion"*"1"*"."* ]]; then
             part1="${filename}"
         fi
-        if [[ $filename == *"e"*"tion"*"2"* ]]; then
+        if [[ $filename == *"e"*"tion"*"2"*"."* ]]; then
             part2="${filename}"
             part4="${filename}"
         fi
-        if [[ $filename == *"e"*"tion"*"3"* ]]; then
+        if [[ $filename == *"e"*"tion"*"3"*"."* ]]; then
             part3="${filename}"
         fi
-        if [[ $filename == *"e"*"tion"*"4"* ]]; then
+        if [[ $filename == *"e"*"tion"*"4"*"."* ]]; then
             part4="${filename}"
         fi
     done
