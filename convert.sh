@@ -22,6 +22,9 @@ clip_length=10
 # Where to copy the finished clip. Leave empty if you don't wish to copy it.
 target_folder=""
 
+# Ending of demo clip. Leave empty if you don't want a demo clip.
+demo_ending="_demo"
+
 # Get the current folder name to use as file name.
 # I e, company/*.mp4 will result in company/company.mp4.
 finished_filename=${PWD##*/}
@@ -100,6 +103,24 @@ ffmpeg -i long.mp4 -filter:v "crop=1600:160:4800:0" part4.mp4
 
 # Stack the four clips on top of each other to the finished clip. (1560px x 640px)
 ffmpeg -i part1.mp4 -i part2.mp4 -i part3.mp4 -i part4.mp4 -filter_complex vstack=4 ${finished_filename}.mp4
+
+# Create a demo clip if user has set a demo file name ending.
+if [ ! -z "${demo_ending}" ]; then
+    # Set padding for each clip to make them same size.
+    ffmpeg -i part1_t.mp4 -filter:v "pad=2720:160:0:0:black" part1_d.mp4
+    ffmpeg -i part2_t.mp4 -filter:v "pad=2720:160:0:0:black" part2_d.mp4
+    ffmpeg -i part3_t.mp4 -filter:v "pad=2720:160:0:0:black" part3_d.mp4
+    ffmpeg -i part4_t.mp4 -filter:v "pad=2720:160:0:0:black" part4_d.mp4
+
+    # Stack the clips on top of each other.
+    ffmpeg -i part1_d.mp4 -i part2_d.mp4 -i part3_d.mp4 -i part4_d.mp4 -filter_complex vstack=4 demo.mp4
+
+    # Make it smaller.    
+    ffmpeg -i demo.mp4 -vf scale=1360:80 ${finished_filename}${demo_ending}.mp4
+    
+    # Remove temporary file.
+    rm demo.mp4
+fi
 
 # Remove the temporary files.
 rm long.mp4 part*.mp4 
