@@ -46,6 +46,9 @@ if [ "$#" -eq 3 ]; then
     part4=$2
 fi
 
+# Rename all files in folder to get rid of whitespaces in filenames.
+for f in *\ *; do mv "$f" "${f// /_}"; done
+
 # Look through the files in the folder the script was run from, find files
 # with extension mv4 or mp4 and try to get a map between file and section
 # based on file name.
