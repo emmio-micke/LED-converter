@@ -16,16 +16,21 @@ if ! command -v jq &> /dev/null; then
     exit 1
 fi
 
-# Check if config.json exists
-if [ ! -f "config.json" ]; then
-    echo "Error: config.json not found. Please create a configuration file."
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CONFIG_FILE="${SCRIPT_DIR}/config.json"
+
+# Check if config.json exists in the script directory
+if [ ! -f "$CONFIG_FILE" ]; then
+    echo "Error: config.json not found in script directory: $SCRIPT_DIR"
+    echo "Please create a configuration file in the same directory as this script."
     exit 1
 fi
 
 # Read configuration from JSON
-ROWS=$(jq -r '.movie.rows' config.json)
-COLUMNS=$(jq -r '.movie.columns' config.json)
-PANEL_RESOLUTION=$(jq -r '.movie.panel_resolution' config.json)
+ROWS=$(jq -r '.movie.rows' "$CONFIG_FILE")
+COLUMNS=$(jq -r '.movie.columns' "$CONFIG_FILE")
+PANEL_RESOLUTION=$(jq -r '.movie.panel_resolution' "$CONFIG_FILE")
 
 # Extract panel dimensions
 PANEL_WIDTH=$(echo $PANEL_RESOLUTION | cut -d'x' -f1)
@@ -121,7 +126,7 @@ ffmpeg -i "$part4" -c copy -t $clip_length part4_t.mp4
 # Function to get panel list for a screen
 get_panels() {
     local screen_name=$1
-    jq -r ".screens.${screen_name}.panels[]" config.json | tr '\n' ' '
+    jq -r ".screens.${screen_name}.panels[]" "$CONFIG_FILE" | tr '\n' ' '
 }
 
 # Function to create panel videos from a screen video
